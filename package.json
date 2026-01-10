@@ -4,10 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "lint": "eslint src",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "prepare": "husky install"
   },
   "dependencies": {
     "http": "^0.0.1-security",
