@@ -7,4 +7,5 @@ const postsSchema = new mongoose.Schema({
     tags: [String],
 },{timestamps:true})
 
-export const Post = mongoose.model('post', postsSchema)
+const Post = mongoose.model('post', postsSchema)
+export default Post
