@@ -1,11 +1,11 @@
-import { MongoMemoryServer } from 'mongodb-memory-server'
+import { MongoMemoryServer } from 'mongodb-memory-server';
 
-export default globalSetupFunction () {
-    const instance = MongoMemoryServer.create({
+export default async function globalSetupFunction() {
+    const instance = await MongoMemoryServer.create({
         binary: {
-            version: '6.0.4', // same version as Docker
-        },
-        global.__MONGOINSTANCE = instance
-        process.env.DATABASE_URL = instance.getUri()
-    })
+            version: '8.0.0'
+        }
+    });
+    global.__MONGOINSTANCE = instance;
+    process.env.DATABASE_URL = instance.getUri();
 }
