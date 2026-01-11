@@ -1,4 +1,4 @@
-import Post from '../db/models/posts.model';
+import Post from '../db/models/posts.model.js';
 import mongoose from 'mongoose';
 import { describe, expect, test, beforeEach} from '@jest/globals';
 import {
@@ -12,7 +12,7 @@ import {
     listPostsByAuthor,
     getPostById,
     
-} from '../services/posts.services'
+} from '../services/posts.services.js'
 
 describe('creating Posts',()=>{
     test('with all parameters should pass', async()=>{
