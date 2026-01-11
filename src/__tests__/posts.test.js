@@ -140,5 +140,13 @@ describe( 'update posts', ()=>{
     
         expect(updatedPost._id).toEqual(createdSamplePost._id);
         expect(updatedPost.toObject()).toMatchObject(valuesUpdated);
+    }),
+
+    test('should update the timestamp', async()=>{
+        await updatePost(createdSamplePosts[0]._id,{
+            title:'Burger Kind'
+        })
+        const updatedPost = await Post.findById(createdSamplePosts[0]._id)
+        expect(updatedPost.updatedAt.getTime()).toBeGreaterThan(createdSamplePosts[0].updatedAt.getTime())
     })
 })
