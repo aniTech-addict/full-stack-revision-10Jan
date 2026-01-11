@@ -30,23 +30,24 @@ export function postRoutes(){
         }
     }); 
 
-    app.get('api/v1/posts/:id', async(req, res)=>{
-        const postId = req.params;
+    app.get('/api/v1/posts/:id', async(req, res)=>{
+        const postId = req.params.id;
         try {
             const post = await getPostById(postId);
             if (post == null){
                 return res
                     .status(404)
                     .json({error: `post with ${postId} not found` })
-            } 
+            }
+            return res.json(post);
         } catch (err) {
             return res
                 .status(400)
                 .json({error: err})
         }
-    }),
+    })
 
-    app.post('api/v1/posts', async(req, res)=>{
+    app.post('/api/v1/posts', async(req, res)=>{
         try
         {
             const post = await createPost(req.body)
@@ -58,7 +59,7 @@ export function postRoutes(){
         }
     })
 
-    app.patch('api/v1/posts/:id', async(req, res)=>{
+    app.patch('/api/v1/posts/:id', async(req, res)=>{
         try{
             const post = await updatePost(req.params.id, req.body)
             return res.json(post)
@@ -69,7 +70,7 @@ export function postRoutes(){
         }
     })
 
-    app.delete('api/v1/posts/:id', async(req, res)=>{
+    app.delete('/api/v1/posts/:id', async(req, res)=>{
         try{
             const { deletedCount } = await deletePost(req.params.id)
             if (deletedCount === 0){
