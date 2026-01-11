@@ -156,3 +156,16 @@ describe( 'update posts', ()=>{
         expect(post).toBe(null)
     })
 })
+
+describe('delete Posts', ()=>{
+    test('Delete post by id', async()=>{
+        const post = await deletePost(createdSamplePosts[0]._id)
+        expect(post.deletedCount).toEqual(1);
+        const deletedPost = await Post.findById(createdSamplePosts[0]._id)
+        expect(deletedPost).toBe(null) 
+    })
+    test('no post with id present should fail and return null', async()=>{
+        const deletedPost = await deletePost('000000000000000000000000');
+        expect(deletedPost.deletedCount).toEqual(0)
+    })
+})
