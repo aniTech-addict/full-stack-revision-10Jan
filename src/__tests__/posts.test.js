@@ -148,5 +148,11 @@ describe( 'update posts', ()=>{
         })
         const updatedPost = await Post.findById(createdSamplePosts[0]._id)
         expect(updatedPost.updatedAt.getTime()).toBeGreaterThan(createdSamplePosts[0].updatedAt.getTime())
+    }),
+    test('test should fail if no post with id exists', async()=>{
+        const post = await updatePost('000000000000000000000000',{
+            title: 'Failed Task'
+        })
+        expect(post).toBe(null)
     })
 })
