@@ -44,5 +44,41 @@ export function postRoutes(){
                 .status(400)
                 .json({error: err})
         }
+    }),
+
+    app.post('api/v1/posts', async(req, res)=>{
+        try
+        {
+            const post = await createPost(req.body)
+            return res.json(post)
+        } catch (err){
+            return res
+                .status(500)
+                .json({error:`error creating post`}).end()
+        }
+    })
+
+    app.patch('api/v1/posts/:id', async(req, res)=>{
+        try{
+            const post = await updatePost(req.params.id, req.body)
+            return res.json(post)
+        } catch (err) {
+            return res
+                .status(500)
+                .json({error:'Error updating post'}).end()
+        }
+    })
+
+    app.delete('api/v1/posts/:id', async(req, res)=>{
+        try{
+            const { deletedCount } = await deletePost(req.params.id)
+            if (deletedCount === 0){
+                return res.status(204).json({error: 'Post not found'})
+            } 
+        } catch (err) {
+            return res
+                .status(500)
+                .json({error:`error Error : ${err} occurred during post delete`})
+        }
     })
 }
