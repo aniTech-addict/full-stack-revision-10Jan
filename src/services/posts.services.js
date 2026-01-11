@@ -28,13 +28,35 @@ async function listPostsByAuthor(author, options){
 }
 
 async function listPostsByTag(tags, options) {
-return await listPosts({ query: { tags } }, options)
+    return await listPosts({ query: { tags } }, options)
+}
+
+async function getPostById(postId){
+    return await Post.findById(postId)
+}
+
+async function updatePost(postId, { title, author, contents, tags }){
+    return await Post.findOneAndUpdate(
+{ _id: postId },
+{ $set: { title, author, contents, tags } },
+{ new: true },
+    )
+}
+
+async function deletePost(postId) {
+    return await Post.deleteOne({ _id: postId })
 }
 
 
 export {
+    
     createPost,
+    updatePost,
+    deletePost,
+    
     listAllPosts,
     listPostsByTag,
-    listPostsByAuthor
+    listPostsByAuthor,
+    getPostById,
+    
 }

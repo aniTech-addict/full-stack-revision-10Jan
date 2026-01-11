@@ -2,10 +2,16 @@ import Post from '../db/models/posts.model';
 import mongoose from 'mongoose';
 import { describe, expect, test, beforeEach} from '@jest/globals';
 import {
+
     createPost,
+    updatePost,
+    deletePost,
+
     listAllPosts,
     listPostsByTag,
-    listPostsByAuthor
+    listPostsByAuthor,
+    getPostById,
+    
 } from '../services/posts.services'
 
 describe('creating Posts',()=>{
@@ -101,4 +107,38 @@ describe('list Posts',()=>{
         expect (posts.length).toBe(2)
     })
 
+})
+
+describe('getting a post', ()=>{
+    test('should return the full post', async () => {
+        const post = await getPostById(createdSamplePosts[0]._id)
+        expect(post.toObject()).toEqual(createdSamplePosts[0].toObject())
+    })
+    test('should fail if the id does not exist', async () => {
+        const post = await getPostById('000000000000000000000000')
+        expect(post).toEqual(null)
+    })
+})
+
+describe( 'update posts', ()=>{
+    test( 'find and update post by id', async()=>{
+        const samplePost = {
+            title: "SamplePost",
+            author: "Sample Post Tester",
+            contents: "Updating Posts by their id",
+            tags: ["update"]
+        }
+        const valuesUpdated = {
+            title: "SamplePost01",
+            author: "Sample Post Tested",
+            contents: "Updated post",
+            tags: ["updated"]
+        }
+        const createdSamplePost = new Post(samplePost);
+        await createdSamplePost.save()
+        const updatedPost = await updatePost(createdSamplePost._id, valuesUpdated)
+    
+        expect(updatedPost._id).toEqual(createdSamplePost._id);
+        expect(updatedPost.toObject()).toMatchObject(valuesUpdated);
+    })
 })
