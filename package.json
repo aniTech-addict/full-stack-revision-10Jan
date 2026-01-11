@@ -6,12 +6,16 @@
   "scripts": {
     "lint": "eslint src",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dev": "nodemon src/index.js"
   },
   "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^4.18.2",
     "http": "^0.0.1-security",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.2",
+    "nodemon": "^3.1.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
