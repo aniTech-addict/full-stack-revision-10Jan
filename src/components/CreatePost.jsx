@@ -1,4 +1,4 @@
-export default function CreatePost(){
+export function CreatePost(){
     return (
         <form onSubmit={(e) => e.preventDefault() }>
             <div>

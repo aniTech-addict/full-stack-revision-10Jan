@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import PropTypes from 'prop-types'
 import { Post } from './Post.jsx'
 
-export default function PostList({ posts = [] }){
+export function PostList({ posts = [] }){
     return (
         <div>
             {
