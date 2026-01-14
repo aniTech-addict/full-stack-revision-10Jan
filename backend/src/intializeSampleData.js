@@ -5,14 +5,30 @@ import Post  from './db/models/posts.model.js'
 
 await initDB()
 
-const post = new Post({
-    title: 'Nigga',
-    author: 'Daniel',
-    contents: 'one nigga pollute whole nigga gang',
-    tags: ['niggas', 'black'],
-})
+const posts = [
+    new Post({
+        title: 'Nigga',
+        author: 'Daniel',
+        contents: 'one nigga pollute whole nigga gang',
+        tags: ['niggas', 'black'],
+    }),
+    new Post({
+        title: 'Second Post',
+        author: 'Jane Doe',
+        contents: 'This is the content of the second post.',
+        tags: ['example', 'second'],
+    }),
+    new Post({
+        title: 'Third Post',
+        author: 'John Smith',
+        contents: 'This is the content of the third post.',
+        tags: ['example', 'third'],
+    }),
+];
 
-await post.save()
+for (const post of posts) {
+    await post.save();
+}
 
-const posts = await Post.find()
-console.log(posts)
+const fetchedPosts = await Post.find()
+console.log(fetchedPosts)
