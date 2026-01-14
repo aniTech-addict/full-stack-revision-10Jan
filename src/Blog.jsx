@@ -23,16 +23,19 @@ export function Blog() {
       <br />
       <hr />
       Filter by:
-      <PostFilter field='author' value={author} onChange={(value) => setAuthor(value)} />
+      <PostFilter field='author' value={author} onAuthorChange={(author) => setAuthor(author)} />
 
       <br />
       
       <PostSorting
         fields={['createdAt', 'updatedAt']}
-        value={sortBy}
-        onChange={(value) => setSortBy(value)}
-        orderValue={sortOrder}
+
+        field={sortBy}
+        onFieldChange={(field) => setSortBy(field)}
+        
+        order={sortOrder}
         onOrderChange={(order) => setSortOrder(order)}
+      
       />
       <hr />
       <PostList posts={posts} />
