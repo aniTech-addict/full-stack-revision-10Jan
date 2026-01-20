@@ -3,24 +3,23 @@ export const getPosts = async (queryParams) => {
     try {
         const res = await fetch(
             `${import.meta.env.VITE_BACKEND_URL}/posts?` +
-            new URLSearchParams(queryParams)
-        );
+                new URLSearchParams(queryParams),
+        )
         if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
+            throw new Error(`HTTP error! status: ${res.status}`)
         }
-        return await res.json();
+        return await res.json()
     } catch (error) {
-        console.error('Error fetching posts:', error);
-        throw error;
+        console.error('Error fetching posts:', error)
+        throw error
     }
 }
 
-export const createPost = async(post) => {
-    const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/posts`, {
-            method: "POST",
-            header: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(post)
-        })
+export const createPost = async (post) => {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/posts`, {
+        method: 'POST',
+        header: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post),
+    })
     return await res.json()
-}   
+}

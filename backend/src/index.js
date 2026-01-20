@@ -1,8 +1,8 @@
-import {app} from './app.js';
+import { app } from './app.js'
 import dotenv from 'dotenv'
 dotenv.config()
-import {initDB} from './db/init.js'
-import { postRoutes } from './routes/posts.route.js';
+import { initDB } from './db/init.js'
+import { postRoutes } from './routes/posts.route.js'
 
 try {
     await initDB()
@@ -11,6 +11,6 @@ try {
     postRoutes(app)
 
     console.info(`express server running on http://localhost:${PORT}`)
-    } catch (err) {
+} catch (err) {
     console.error('error connecting to database:', err)
 }

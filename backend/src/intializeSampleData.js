@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
 import { initDB } from './db/init.js'
-import Post  from './db/models/posts.model.js'
+import Post from './db/models/posts.model.js'
 
 await initDB()
 
@@ -24,10 +24,10 @@ const posts = [
         contents: 'This is the content of the third post.',
         tags: ['example', 'third'],
     }),
-];
+]
 
 for (const post of posts) {
-    await post.save();
+    await post.save()
 }
 
 const fetchedPosts = await Post.find()
