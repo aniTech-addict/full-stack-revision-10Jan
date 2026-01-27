@@ -6,7 +6,8 @@ export default defineConfig({
     plugins: [react()],
     server: {
         watch: {
-            ignored: ['backend/**'],
+            include: ['src/**', 'index.html', 'vite.config.js'],
+            ignored: (path) => path.includes('backend'),
         },
     },
 })
