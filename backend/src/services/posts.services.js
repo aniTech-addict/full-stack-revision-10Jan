@@ -15,19 +15,20 @@ async function listPosts({
     sortBy = 'createdAt',
     sortOrder = 'descending',
 } = {}) {
-    return await Post.find(query).sort({ [sortBy]: sortOrder })
+    const sortValue = sortOrder === 'ascending' ? 1 : -1;
+    return await Post.find(query).sort({ [sortBy]: sortValue })
 }
 
-async function listAllPosts() {
-    return await listPosts({})
+async function listAllPosts(options = {}) {
+    return await listPosts(options)
 }
 
 async function listPostsByAuthor(author, options) {
-    return await listPosts({ query: { author } }, options)
+    return await listPosts({ query: { author }, ...options })
 }
 
 async function listPostsByTag(tags, options) {
-    return await listPosts({ query: { tags } }, options)
+    return await listPosts({ query: { tags }, ...options })
 }
 
 async function getPostById(postId) {

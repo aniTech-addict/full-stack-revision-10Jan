@@ -9,21 +9,21 @@ import {
     getPostById,
 } from '../services/posts.services.js'
 
-export function postRoutes() {
-    app.get('/api/v1/posts', async (req, res) => {
-        const { sortBy, sortOrder, author, tag } = req.query
-        const options = { sortBy, sortOrder } // This line was inside the async function
+export function postRoutes(){
+    app.get('/api/v1/posts', async(req, res)=>{
+        const {sortBy, sortOrder, author, tag} = req.query;
+        const options = {sortBy, sortOrder};
 
         if (author && tag) {
             return res
                 .status(400)
                 .json({ error: 'query with either author or tag, not Both' })
         } else if (author) {
-            return res.json(await listPostsByAuthor(author))
+            return res.json(await listPostsByAuthor(author, options))
         } else if (tag) {
-            return res.json(await listPostsByTag(tag))
+            return res.json(await listPostsByTag(tag, options))
         } else {
-            return res.json(await listAllPosts())
+            return res.json(await listAllPosts(options))
         }
     })
 
